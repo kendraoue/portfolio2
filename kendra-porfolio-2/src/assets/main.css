@@ -1,0 +1,28 @@
+@import "./base.css";
+@import "tailwindcss";
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("@/assets/fonts/Cookiemonster.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("@/assets/fonts/Fresh Palm.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #ffaedf;
+}
+
+.cookie-font {
+  font-family: "CustomFont", sans-serif;
+}
+
+.Palm-font {
+  font-family: "CustomFont", sans-serif;
+}
