@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { useDraggable } from "@vueuse/core";
+import "vue3-carousel/carousel.css";
+import { Carousel, Slide, Navigation } from "vue3-carousel";
 import { useTemplateRef, ref, onMounted, onUnmounted } from "vue";
 import KendraPhoto from "@/assets/images/ardnek.jpg";
 import Heart from "@/assets/images/Heart.png";
@@ -7,7 +9,16 @@ import HeartFlipped from "@/assets/images/HeartFlipped.png";
 import Purplesticky from "@/assets/images/Purplesticky.png";
 import PixelHeart from "@/assets/images/PixelHeart.png";
 import CatHeart from "@/assets/images/CatHeart.gif";
+import Placeholder1 from "@/assets/images/Placeholder1.png";
+import Placeholder2 from "@/assets/images/Placeholder2.png";
+import Placeholder3 from "@/assets/images/Placeholder3.png";
+import Placeholder4 from "@/assets/images/Placeholder4.png";
 import PixelHeartInterest from "@/components/PixelHeartInterest.vue";
+import PDFView from "@/components/PDFView.vue";
+import PDF from "pdf-vue3";
+
+// The source PDF file
+const pdfSource = ref("/Resume.pdf");
 
 // Define refs for five draggable elements
 const box1 = useTemplateRef<HTMLElement>("box1");
@@ -88,6 +99,44 @@ const {
 } = useDraggable(box4, {
   initialValue: getInitialPosition("box4-pos", 140, 340),
 });
+
+//Carousel logic
+const currentSlide = ref(0);
+const items = ref([
+  {
+    id: 1,
+    image: Placeholder1,
+    title: "Project One",
+    description: "Description for project one.",
+  },
+  {
+    id: 2,
+    image: Placeholder2,
+    title: "Project Two",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    id: 3,
+    image: Placeholder3,
+    title: "Project Three",
+    description:
+      "Lorem Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  },
+  {
+    id: 4,
+    image: Placeholder4,
+    title: "Project Four",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  },
+]);
+
+const galleryConfig = {
+  mouseDrag: false,
+  itemsToShow: 1,
+  wrapAround: true,
+};
 </script>
 
 <template>
@@ -163,23 +212,45 @@ const {
         </svg>
         Resume
       </button>
-      <button
+      <a
+        href="https://github.com/kendraoue"
         class="p-3 rounded-lg size-24 flex flex-col items-center justify-center"
-        @click="toggleBox('box4')"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="40"
-          height="40"
-          viewBox="0 0 20 20"
+          width="64"
+          height="64"
+          viewBox="0 0 24 24"
+        >
+          <g fill="none">
+            <path
+              d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"
+            />
+            <path
+              fill="#9f76c9"
+              d="M7.024 2.31a9 9 0 0 1 2.125 1.046A11.4 11.4 0 0 1 12 3c.993 0 1.951.124 2.849.355a9 9 0 0 1 2.124-1.045c.697-.237 1.69-.621 2.28.032c.4.444.5 1.188.571 1.756c.08.634.099 1.46-.111 2.28C20.516 7.415 21 8.652 21 10c0 2.042-1.106 3.815-2.743 5.043a9.5 9.5 0 0 1-2.59 1.356c.214.49.333 1.032.333 1.601v3a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-.991c-.955.117-1.756.013-2.437-.276c-.712-.302-1.208-.77-1.581-1.218c-.354-.424-.74-1.38-1.298-1.566a1 1 0 0 1 .632-1.898c.666.222 1.1.702 1.397 1.088c.48.62.87 1.43 1.63 1.753c.313.133.772.22 1.49.122L8 17.98a4 4 0 0 1 .333-1.581a9.5 9.5 0 0 1-2.59-1.356C4.106 13.815 3 12.043 3 10c0-1.346.483-2.582 1.284-3.618c-.21-.82-.192-1.648-.112-2.283l.005-.038c.073-.582.158-1.267.566-1.719c.59-.653 1.584-.268 2.28-.031Z"
+            />
+          </g>
+        </svg>
+        GitHub
+      </a>
+      <a
+        href="https://www.linkedin.com/in/kendra-ouellet-7a8802261/"
+        class="p-3 rounded-lg size-24 flex flex-col items-center justify-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="64"
+          height="64"
+          viewBox="0 0 24 24"
         >
           <path
             fill="#9f76c9"
-            d="M17.74 2.76a4.32 4.32 0 0 1 0 6.1l-1.53 1.52c-1.12 1.12-2.7 1.47-4.14 1.09l2.62-2.61l.76-.77l.76-.76c.84-.84.84-2.2 0-3.04a2.13 2.13 0 0 0-3.04 0l-.77.76l-3.38 3.38c-.37-1.44-.02-3.02 1.1-4.14l1.52-1.53a4.32 4.32 0 0 1 6.1 0M8.59 13.43l5.34-5.34c.42-.42.42-1.1 0-1.52c-.44-.43-1.13-.39-1.53 0l-5.33 5.34c-.42.42-.42 1.1 0 1.52c.44.43 1.13.39 1.52 0m-.76 2.29l4.14-4.15c.38 1.44.03 3.02-1.09 4.14l-1.52 1.53a4.32 4.32 0 0 1-6.1 0a4.32 4.32 0 0 1 0-6.1l1.53-1.52c1.12-1.12 2.7-1.47 4.14-1.1l-4.14 4.15c-.85.84-.85 2.2 0 3.05c.84.84 2.2.84 3.04 0"
+            d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"
           />
         </svg>
-        My Links
-      </button>
+        Linkedin
+      </a>
     </div>
     <!--Animation needed for exit-->
     <!-- Draggable Boxes -->
@@ -229,9 +300,13 @@ const {
           </div>
 
           <!-- Content section with transition -->
-          <div 
+          <div
             class="relative pt-8 transition-all duration-500 ease-in-out"
-            :class="isExpanded ? 'opacity-100 translate-y-0 delay-500' : 'opacity-0 translate-y-10'"
+            :class="
+              isExpanded
+                ? 'opacity-100 translate-y-0 delay-500'
+                : 'opacity-0 translate-y-10'
+            "
           >
             <!-- Interests Title -->
             <div class="text-[#6b3fa3] text-2xl Palm-font text-center mb-4">
@@ -261,9 +336,13 @@ const {
             </div>
 
             <!-- Projects Link -->
-            <div 
+            <div
               class="text-[#6b3fa3] text-2xl Palm-font text-center mt-8 hover:underline cursor-pointer transition-all duration-500 ease-in-out"
-              :class="isExpanded ? 'opacity-100 translate-y-0 delay-1500' : 'opacity-0 translate-y-10'"
+              :class="
+                isExpanded
+                  ? 'opacity-100 translate-y-0 delay-1500'
+                  : 'opacity-0 translate-y-10'
+              "
               @click="toggleBox('box2')"
             >
               Click me to see my projects!
@@ -359,15 +438,78 @@ const {
       v-motion-pop
       :style="style2"
       style="position: fixed"
-      class="w-24 h-24 bg-red-500 rounded-lg select-none cursor-move shadow-md flex flex-col items-center justify-center"
+      class="w-201 rounded-lg select-none cursor-move shadow-md flex flex-col"
     >
-      Box 2
-      <button
-        class="mt-2 text-xs bg-white text-black px-2 py-1 rounded"
-        @click="toggleBox('box2')"
+      <!-- Header Row -->
+      <div
+        class="bg-[#F9F5E4] border-2 border-[#6b3fa3] h-10 flex flex-row items-center"
       >
-        Close
-      </button>
+        <div class="w-192 ps-1 text-lg text-[#6b3fa3]">Projects</div>
+        <button
+          class="m-6 h-7 border-2 bg-[#fef9b5] border-[#6b3fa3]"
+          @click="toggleBox('box2')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ff68b4"
+              d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4"
+            />
+          </svg>
+        </button>
+        <div class="w-1"></div>
+      </div>
+
+      <!-- Content Area -->
+      <div
+        class="bg-[#E4F5F9] border-l-2 border-r-2 border-b-2 border-[#6b3fa3]"
+      >
+        <div class="w-full">
+          <!-- Main Carousel -->
+          <Carousel
+            id="projectGallery"
+            v-bind="galleryConfig"
+            v-model="currentSlide"
+            slide-effect="fade"
+            :transition="500"
+          >
+            <Slide v-for="item in items" :key="item.id">
+              <div class="relative h-[65vh]">
+                <!-- Fixed Image Container -->
+                <div
+                  class="fixed top-3 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-xl"
+                >
+                  <img
+                    :src="item.image"
+                    alt="Project Image"
+                    class="w-full object-cover rounded-lg shadow-lg"
+                  />
+                </div>
+
+                <!-- Scrollable Content Below the Image -->
+                <div
+                  class="flex flex-col items-center pt-[300px] space-y-4 px-4"
+                >
+                  <h2 class="text-xl font-bold text-[#6b3fa3] text-center">
+                    {{ item.title }}
+                  </h2>
+                  <p class="text-[#9f76c9] max-w-xl">
+                    {{ item.description }}
+                  </p>
+                </div>
+              </div>
+            </Slide>
+
+            <template #addons>
+              <Navigation />
+            </template>
+          </Carousel>
+        </div>
+      </div>
     </div>
 
     <div
@@ -375,16 +517,40 @@ const {
       ref="box3"
       v-motion-pop
       :style="style3"
+      @wheel.prevent
       style="position: fixed"
-      class="w-24 h-24 bg-green-500 rounded-lg select-none cursor-move shadow-md flex flex-col items-center justify-center"
+      class="rounded-lg select-none cursor-move shadow-md flex flex-col items-center justify-center"
     >
-      Box 3
-      <button
-        class="mt-2 text-xs bg-white text-black px-2 py-1 rounded"
-        @click="toggleBox('box3')"
+      <!-- First Row -->
+      <div
+        class="bg-[#F9F5E4] border-2 border-[#6b3fa3] h-10 flex flex-row items-center"
       >
-        Close
-      </button>
+        <div class="w-192 ps-1 text-lg text-[#6b3fa3]">My Resume</div>
+        <button
+          class="m-6 h-7 border-2 bg-[#fef9b5] border-[#6b3fa3]"
+          @click="toggleBox('box3')"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#ff68b4"
+              d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4"
+            />
+          </svg>
+        </button>
+        <div class="w-1"></div>
+      </div>
+
+      <!-- Second Row -->
+      <div
+        class="bg-[#E4F5F9] border-l-2 border-r-2 border-b-2 border-[#6b3fa3] cursor-pointer flex flex-row w-full h-full overflow-hidden scrollbar-thin scrollbar-thumb-[#6b3fa3] scrollbar-track-[#f0e6ff]"
+      >
+        <PDF :src="pdfSource" :page="currentPage" class="w-full h-full" />
+      </div>
     </div>
 
     <div
@@ -410,6 +576,8 @@ const {
 /* Prevent text selection while dragging */
 * {
   user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: #6b3fa3 #f0e6ff;
 }
 
 /* Hide scrollbar while maintaining scroll functionality */
@@ -450,5 +618,11 @@ const {
 .animate-bounce {
   animation: bounce 2s ease-in-out infinite;
 }
+/*Carousel*/
+.carousel {
+  --vc-nav-color: #6b3fa3;
+  --vc-nav-color-hover: #9f76c9;
+  --vc-nav-width: 70px;
+  --vc-nav-height: 70px;
+}
 </style>
-/* Ensure pop animation only plays once */
