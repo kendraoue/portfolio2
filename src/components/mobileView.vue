@@ -409,6 +409,8 @@ import PDF from "pdf-vue3";
 import profilePicture from "@/assets/images/Kendra.png";
 import mohawkAlumni from "@/assets/images/mohawkAlumni.jpeg";
 import skills from "@/assets/images/Skills.png";
+import material from "@/assets/images/material-symbols--event.png";
+import chat from "@/assets/images/cil--chat-bubble.png";
 
 // State to track the currently visible modal
 const visibleModal = ref<string | null>(null);
@@ -427,14 +429,14 @@ const closeModal = () => {
 const items = ref([
   {
     id: 1,
-    image: "/src/assets/images/material-symbols--event.png",
+    image: material,
     title: "Tournament Team Manager",
     description:
       "A full-stack application built with React, Express, and MongoDB. It allows users to manage teams, tournaments, and profiles with role-based access control. Features include Discord OAuth login, team and tournament management, and role-based permissions for Admins and Team Members.",
   },
   {
     id: 2,
-    image: "/src/assets/images/cil--chat-bubble.png",
+    image: chat,
     title: "GamerHub",
     description:
       "Developed a gaming social platform using Laravel (backend) and Vue 3 + Inertia.js (frontend). Integrated Steam API, group management, and event scheduling.",
