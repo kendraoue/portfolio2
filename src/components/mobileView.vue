@@ -406,9 +406,9 @@
 import { ref } from "vue";
 import PDF from "pdf-vue3";
 
-const profilePicture = ref("/src/assets/images/Kendra.png");
-const mohawkAlumni = ref("/src/assets/images/mohawkAlumni.jpeg");
-const skills = ref("/src/assets/images/Skills.png");
+import profilePicture from "@/assets/images/Kendra.png";
+import mohawkAlumni from "@/assets/images/mohawkAlumni.jpeg";
+import skills from "@/assets/images/Skills.png";
 
 // State to track the currently visible modal
 const visibleModal = ref<string | null>(null);
