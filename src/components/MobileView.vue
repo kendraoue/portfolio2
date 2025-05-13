@@ -434,7 +434,7 @@ const items = ref([
   },
   {
     id: 2,
-    image: ,skills,
+    image: skills,
     title: "GamerHub",
     description:
       "Developed a gaming social platform using Laravel (backend) and Vue 3 + Inertia.js (frontend). Integrated Steam API, group management, and event scheduling.",
