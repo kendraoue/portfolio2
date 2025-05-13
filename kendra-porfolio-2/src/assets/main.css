@@ -2,28 +2,41 @@
 @import "tailwindcss";
 @import "flowbite/dist/flowbite.min.css";
 
+/* Define unique font-family names for each font */
 @font-face {
-  font-family: "CustomFont";
+  font-family: "Cookiemonster";
   src: url("@/assets/fonts/Cookiemonster.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "CustomFont";
+  font-family: "FreshPalm";
   src: url("@/assets/fonts/Fresh Palm.otf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
-body {
-  background-color: #ffaedf;
+@font-face {
+  font-family: "KeeponTruckin";
+  src: url("@/assets/fonts/KeeponTruckin.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
+/* Define utility classes for each font */
 .cookie-font {
-  font-family: "CustomFont", sans-serif;
+  font-family: "Cookiemonster", sans-serif;
 }
 
 .Palm-font {
-  font-family: "CustomFont", sans-serif;
+  font-family: "FreshPalm", sans-serif;
+}
+
+.Truckin-font {
+  font-family: "KeeponTruckin", sans-serif;
+}
+
+.LastDream-font {
+  font-family: "KeeponTruckin", sans-serif; /* Update if this should use a different font */
 }

@@ -13,6 +13,7 @@ import Placeholder1 from "@/assets/images/Placeholder1.png";
 import Placeholder2 from "@/assets/images/Placeholder2.png";
 import Placeholder3 from "@/assets/images/Placeholder3.png";
 import Placeholder4 from "@/assets/images/Placeholder4.png";
+import Polariod from "@/assets/images/Polariod.png";
 import PixelHeartInterest from "@/components/PixelHeartInterest.vue";
 import PDFView from "@/components/PDFView.vue";
 import PDF from "pdf-vue3";
@@ -40,6 +41,11 @@ const handleScroll = (event: WheelEvent) => {
 // Add event listener on component mount
 onMounted(() => {
   window.addEventListener("wheel", handleScroll, { passive: false });
+
+  // Automatically expand the first box after 3 seconds
+  setTimeout(() => {
+    visibleBoxes.value.box1 = true;
+  }, 3000);
 });
 
 // Remove event listener on component unmount
@@ -106,29 +112,37 @@ const items = ref([
   {
     id: 1,
     image: Placeholder1,
-    title: "Project One",
-    description: "Description for project one.",
+    title: "Team Manager App",
+    description:
+      "This application is built with React on the frontend, using Express for the backend, and MongoDB for data storage. It enables users to manage teams, tournaments, and profiles with role-based access control.",
+    frontend:
+      "- The app offers a dynamic, responsive interface, allowing users to register, log in via Discord OAuth, and manage teams and tournaments.",
+    backend:
+      "- Handles authentication, user management, and the creation and modification of tournaments and teams. It ensures role-based access control (Admins, Team Members) and enforces limits like maximum team size and the number of teams per tournament.",
+    database:
+      "- Stores user data, tournament details, teams, and team memberships, ensuring efficient management and scalability.",
   },
   {
     id: 2,
     image: Placeholder2,
-    title: "Project Two",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    title: "GamerHub",
+    frontend:
+      "Vue 3 - Handles user actions like profile updates, group management, event creation, and real-time search. Uses Inertia.js for smooth, reload-free navigation between Vue and the backend.",
+    backend:
+      "Laravel - Handles auth, business logic, and data processing for profiles, groups, events, and Steam API. Uses PHPUnit for automated testing and stability.",
+    database:
+      "PostgreSQL -  Stored all structured data such as user profiles, group memberships, events, and chat messages. It integrates tightly with Laravel's Eloquent ORM for easy querying and data manipulation, supporting complex relationships like group ownership, event participation, and linked Steam accounts.",
   },
   {
     id: 3,
     image: Placeholder3,
-    title: "Project Three",
-    description:
-      "Lorem Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  },
-  {
-    id: 4,
-    image: Placeholder4,
-    title: "Project Four",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    title: "Invoice Automation Application",
+    frontend:
+      "React - Offers a secure, user-friendly interface for configuring invoice parsing, managing presets, and reviewing reports. It uses Microsoft Entra ID (Azure AD) for authentication and supports drag-and-drop PDF field selection.",
+    backend:
+      "Django - Handles email ingestion, PDF parsing, CSV generation, and reporting. It processes invoices using vendor-specific rules and supports both scheduled and manual parsing, with detailed error handling and system feedback.",
+    database:
+      "SQLite -  Stores presets, parsing results, and report data. It helps manage system state, supports CSV generation, and avoids duplicate invoice processing.",
   },
 ]);
 
@@ -140,7 +154,7 @@ const galleryConfig = {
 </script>
 
 <template>
-  <div class="flex h-screen overflow-hidden">
+  <div class="flex h-screen overflow-hidden bg-[#ffaedf]">
     <!-- Buttons to toggle visibility -->
     <div class="flex flex-col gap-4 p-4 fixed left-0 top-0">
       <button
@@ -365,9 +379,10 @@ const galleryConfig = {
               <span><</span>Hello, my name is Kendra Ouellet.>
             </div>
             <div class="text-[#6b3fa3] text-lg ps-3 pe-5">
-              I am a passionate software developer with expertise in web
-              development and user experience design. I love creating beautiful,
-              functional applications that make a difference.
+              As a former dental assistant turned full-stack developer, I’ve
+              built my career on empathy, precision, and adaptability, qualities
+              that now drive my passion for creating impactful digital
+              solutions.
             </div>
           </div>
 
@@ -411,14 +426,13 @@ const galleryConfig = {
               />
               <div class="ps-11 pt-12 pe-8 relative max-w-[350px] mt-4">
                 <div class="text-[#6b3fa3] text-xl">
-                  My journey in technology began with a fascination for how
-                  things work on the internet, and that curiosity has led me to
-                  become a full-stack developer.
-                </div>
-                <div class="text-[#6b3fa3] text-xl mt-4">
-                  When I'm not coding, you can find me exploring new
-                  technologies, contributing to open-source projects, or sharing
-                  my knowledge through technical writing.
+                  Throughout my career, I've had the privilege of working
+                  alongside diverse teams in both the public and private
+                  sectors, developing and optimizing custom applications that
+                  improve business efficiency. I'm naturally curious and love
+                  understanding how things work, whether it's experimenting with
+                  a new framework or learning from everyday challenges to
+                  <span class="">grow as a developer.</span>
                 </div>
               </div>
               <img
@@ -478,28 +492,62 @@ const galleryConfig = {
             :transition="500"
           >
             <Slide v-for="item in items" :key="item.id">
-              <div class="relative h-[65vh]">
-                <!-- Fixed Image Container -->
-                <div
-                  class="fixed top-3 left-1/2 transform -translate-x-1/2 z-10 w-full max-w-xl"
-                >
-                  <img
-                    :src="item.image"
-                    alt="Project Image"
-                    class="w-full object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-
-                <!-- Scrollable Content Below the Image -->
-                <div
-                  class="flex flex-col items-center pt-[300px] space-y-4 px-4"
-                >
-                  <h2 class="text-xl font-bold text-[#6b3fa3] text-center">
+              <div
+                class="relative h-[65vh] flex flex-row justify-center p-12 shadow-lg"
+              >
+                <!-- Text Content Section -->
+                <div class="w-[65%] text-left pr-6 space-y-6">
+                  <h2 class="text-3xl font-bold text-[#6b3fa3] border-b-2">
                     {{ item.title }}
                   </h2>
-                  <p class="text-[#9f76c9] max-w-xl">
-                    {{ item.description }}
-                  </p>
+                  <ul class="text-gray-700 text-lg space-y-5 list-disc pl-7">
+                    <li>
+                      <span class="text-[#6b3fa3]">Frontend: </span>
+                      {{ item.frontend }}
+                    </li>
+                    <li>
+                      <span class="font-bold text-[#6b3fa3]">Backend: </span>
+                      {{ item.backend }}
+                    </li>
+                    <li>
+                      <span class="font-bold text-[#6b3fa3]">Database: </span>
+                      {{ item.database }}
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Image Section -->
+                <div class="w-[45%] flex justify-center items-center relative">
+                  <div
+                    class="absolute w-68 h-64 bg-white border-10 shadow-md"
+                    style="
+                      position: absolute !important;
+                      width: 272px;
+                      height: 256px;
+                    "
+                  >
+                    <img
+                      :src="item.image"
+                      alt="Project Image"
+                      class="w-full h-full object-cover"
+                      style="width: 272px; height: 256px"
+                    />
+                  </div>
+                  <div
+                    class="absolute w-82 h-86 top-25 -left-6"
+                    style="
+                      position: absolute !important;
+                      width: 328px;
+                      height: 344px;
+                    "
+                  >
+                    <img
+                      :src="Polariod"
+                      alt="Project Image"
+                      class="w-full h-full object-cover"
+                      style="width: 328px; height: 344px"
+                    />
+                  </div>
                 </div>
               </div>
             </Slide>
@@ -523,7 +571,7 @@ const galleryConfig = {
     >
       <!-- First Row -->
       <div
-        class="bg-[#F9F5E4] border-2 border-[#6b3fa3] h-10 flex flex-row items-center"
+        class="bg-[#F9F5E4] border-2 border-[#6b3fa3] h-10 flex flex-row items-center w-full"
       >
         <div class="w-192 ps-1 text-lg text-[#6b3fa3]">My Resume</div>
         <button
