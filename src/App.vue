@@ -12,7 +12,7 @@ const isMobile = computed(() => width.value < 768);
 </script>
 
 <template>
-  <div class="h-screen">
+  <div class="h-screen bg-pink-200">
     <MobileView v-if="isMobile" />
     <DesktopView v-else />
   </div>

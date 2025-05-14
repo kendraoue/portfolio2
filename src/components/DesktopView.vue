@@ -151,6 +151,14 @@ const galleryConfig = {
   itemsToShow: 1,
   wrapAround: true,
 };
+
+// Function to download the resume
+const downloadResume = () => {
+  const link = document.createElement("a");
+  link.href = pdfSource.value; // The URL of the PDF file
+  link.download = "Kendra_Ouellet_Resume.pdf"; // The name of the downloaded file
+  link.click();
+};
 </script>
 
 <template>
@@ -574,6 +582,19 @@ const galleryConfig = {
         class="bg-[#F9F5E4] border-2 border-[#6b3fa3] h-10 flex flex-row items-center w-full"
       >
         <div class="w-192 ps-1 text-lg text-[#6b3fa3]">My Resume</div>
+        <button class="pe-3" @click="downloadResume">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="#6b3fa3"
+              d="m12 16l-5-5l1.4-1.45l2.6 2.6V4h2v8.15l2.6-2.6L17 11zm-6 4q-.825 0-1.412-.587T4 18v-3h2v3h12v-3h2v3q0 .825-.587 1.413T18 20z"
+            />
+          </svg>
+        </button>
         <button
           class="m-6 h-7 border-2 bg-[#fef9b5] border-[#6b3fa3]"
           @click="toggleBox('box3')"
