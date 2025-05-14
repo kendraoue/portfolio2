@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-pink-200">
+  <div class="bg-pink-200 h-screen overflow-hidden">
     <div class="grid grid-rows-[auto_auto_auto]">
       <!-- DigitalClock Section -->
       <div class="flex items-center justify-center py-8" ref="digitalClockRef">
@@ -598,5 +598,11 @@ const downloadResume = () => {
 
 .animate-grow {
   animation: grow 0.3s ease-out;
+}
+
+html,
+body {
+  overflow: hidden;
+  height: 100%;
 }
 </style>
