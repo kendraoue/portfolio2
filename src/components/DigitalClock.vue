@@ -1,6 +1,11 @@
 <template>
-  <div class="flex bg-pink-300 rounded-xl shadow-lg px-[7.26rem] py-5">
-    <div class="w-full Truckin-font" style="text-shadow: 2px 2px 0px hotpink">
+  <div
+    class="grid grid-col-[auto_auto] bg-pink-300 rounded-xl shadow-lg w-[20rem] py-5"
+  >
+    <div
+      class="grid grid-rows-[auto_auto] justify-end Truckin-font px-2 col-start-2"
+      style="text-shadow: 2px 2px 0px hotpink"
+    >
       <p class="font-bold text-white text-4xl">
         {{
           currentTime.toLocaleTimeString([], {
@@ -9,8 +14,8 @@
           })
         }}
       </p>
-      <p class="font-bold text-white text-sm mb-1 flex justify-end mr-3">
-        {{ currentTime.toLocaleDateString() }}
+      <p class="font-bold text-white text-sm justify-self-end">
+        {{ currentTime.toLocaleDateString([], { weekday: "long" }) }}
       </p>
     </div>
   </div>

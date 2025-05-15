@@ -1,6 +1,6 @@
 <template>
   <div class="bg-pink-200 h-screen overflow-hidden">
-    <div class="grid grid-rows-[auto_auto_auto] justify-items-start">
+    <div class="grid grid-rows-[auto_auto_auto] justify-items-center">
       <!-- DigitalClock Section -->
       <div class="py-2 px-7" ref="digitalClockRef">
         <DigitalClock />
