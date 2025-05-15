@@ -1,17 +1,15 @@
 <template>
   <div class="bg-pink-200 h-screen overflow-hidden">
-    <div class="grid grid-rows-[auto_auto_auto]">
+    <div class="grid grid-rows-[auto_auto_auto] justify-items-start">
       <!-- DigitalClock Section -->
-      <div class="flex items-center justify-center py-8" ref="digitalClockRef">
+      <div class="py-2 px-7" ref="digitalClockRef">
         <DigitalClock />
       </div>
 
       <!-- Buttons Section -->
-      <div
-        class="grid grid-cols-3 text-white text-xl font-bold h-auto items-center px-4"
-      >
+      <div class="grid grid-cols-3 text-white text-xl font-bold h-auto px-4">
         <!-- Align buttons with DigitalClock -->
-        <div class="grid col-span-1 justify-center px-2 gap-11">
+        <div class="grid col-span-1 px-7 gap-11">
           <button
             class="p-3 bg-pink-400 text-white text-center rounded-lg w-16 h-16 shadow-md flex flex-col items-center justify-center"
             @click="openModal('github')"
@@ -55,7 +53,7 @@
         </div>
 
         <!-- Image Section -->
-        <div class="grid col-span-2 items-center justify-start">
+        <div class="grid px-7 col-span-2">
           <img
             :src="mohawkAlumni"
             alt="Mohawk Alumni"
@@ -65,9 +63,7 @@
       </div>
 
       <!-- Row 3 -->
-      <div
-        class="flex items-center justify-center text-white text-xl font-bold h-full"
-      >
+      <div class="grid px-7 text-white text-xl font-bold h-full">
         <div class="py-2">
           <img
             :src="skills"
