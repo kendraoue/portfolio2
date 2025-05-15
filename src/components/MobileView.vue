@@ -9,7 +9,7 @@
       <!-- Buttons Section -->
       <div class="grid grid-cols-3 text-white text-xl font-bold h-auto px-4">
         <!-- Align buttons with DigitalClock -->
-        <div class="grid col-span-1 px-7 gap-11">
+        <div class="grid col-span-1 px-7 gap-5">
           <button
             class="p-3 bg-pink-400 text-white text-center rounded-lg w-16 h-16 shadow-md flex flex-col items-center justify-center"
             @click="openModal('github')"
@@ -57,7 +57,7 @@
           <img
             :src="mohawkAlumni"
             alt="Mohawk Alumni"
-            class="rounded-lg w-43 h-43 shadow-md"
+            class="rounded-lg w-43 h-36 shadow-md"
           />
         </div>
       </div>
