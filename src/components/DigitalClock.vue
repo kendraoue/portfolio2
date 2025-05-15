@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-2 bg-pink-300 rounded-xl shadow-lg w-[20rem] h-[10rem] p-4"
+    class="grid grid-cols-2 bg-pink-300 rounded-xl shadow-lg w-[20rem] h-[8rem] p-4"
   >
     <div
       class="Truckin-font text-3xl text-white px-2"
@@ -9,7 +9,7 @@
       <h2>Welcome</h2>
     </div>
     <div
-      class="grid grid-rows-2 justify-end Truckin-font px-2"
+      class="grid grid-rows-2 Truckin-font px-2 text-right"
       style="text-shadow: 2px 2px 0px hotpink"
     >
       <p class="font-bold text-white text-4xl">
@@ -20,7 +20,7 @@
           })
         }}
       </p>
-      <p class="font-bold text-white text-sm justify-self-end px-2">
+      <p class="font-bold text-white text-sm px-2">
         {{ currentTime.toLocaleDateString([], { weekday: "long" }) }}
       </p>
     </div>
