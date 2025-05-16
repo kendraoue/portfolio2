@@ -1,9 +1,9 @@
 <template>
   <div
-    class="grid grid-cols-2 bg-pink-300 rounded-xl shadow-lg w-[20rem] h-[8rem] p-4"
+    class="grid grid-cols-2 bg-pink-300 rounded-xl shadow-lg w-[20rem] h-[7rem] p-2"
   >
     <div
-      class="Truckin-font text-3xl text-white px-2"
+      class="flex items-center Truckin-font text-3xl text-white px-2"
       style="text-shadow: 2px 2px 0px hotpink"
     >
       <h2>Welcome</h2>
