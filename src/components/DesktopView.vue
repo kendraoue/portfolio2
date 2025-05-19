@@ -504,11 +504,15 @@ const downloadResume = () => {
                 class="relative h-[65vh] flex flex-row justify-center p-12 shadow-lg"
               >
                 <!-- Text Content Section -->
-                <div class="w-[65%] text-left pr-6 space-y-6">
-                  <h2 class="text-3xl font-bold text-[#6b3fa3] border-b-2">
+                <div class="w-full md:w-[65%] text-left pr-6 space-y-6">
+                  <h2
+                    class="text-2xl md:text-3xl font-bold text-[#6b3fa3] border-b-2"
+                  >
                     {{ item.title }}
                   </h2>
-                  <ul class="text-gray-700 text-lg space-y-5 list-disc pl-7">
+                  <ul
+                    class="text-gray-700 text-base md:text-lg space-y-5 list-disc pl-7 pr-3"
+                  >
                     <li>
                       <span class="text-[#6b3fa3]">Frontend: </span>
                       {{ item.frontend }}
@@ -532,6 +536,9 @@ const downloadResume = () => {
                       position: absolute !important;
                       width: 272px;
                       height: 256px;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
                     "
                   >
                     <img
@@ -542,11 +549,14 @@ const downloadResume = () => {
                     />
                   </div>
                   <div
-                    class="absolute w-82 h-86 top-25 -left-6"
+                    class="absolute w-82 h-86"
                     style="
                       position: absolute !important;
                       width: 328px;
                       height: 344px;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
                     "
                   >
                     <img
