@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import pixelHeart from "@/assets/images/PixelHeart.png";
+
 defineProps<{
   icon: string;
   label: string;
@@ -26,11 +28,7 @@ defineProps<{
       }
     "
   >
-    <img
-      :src="new URL('@/assets/images/PixelHeart.png', import.meta.url).href"
-      class="w-50 h-30"
-      alt="Heart outline"
-    />
+    <img :src="pixelHeart" class="w-50 h-30" alt="Heart outline" />
     <span class="absolute inset-0 flex items-center justify-center">
       <img :src="icon" class="size-13" :alt="label" />
     </span>
