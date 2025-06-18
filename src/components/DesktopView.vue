@@ -10,8 +10,8 @@ import Purplesticky from "@/assets/images/Purplesticky.png";
 import PixelHeart from "@/assets/images/PixelHeart.png";
 import CatHeart from "@/assets/images/CatHeart.gif";
 import Placeholder1 from "@/assets/images/Placeholder1.png";
-import Placeholder2 from "@/assets/images/Placeholder2.png";
-import Placeholder3 from "@/assets/images/Placeholder3.png";
+import GamerHub from "@/assets/images/GamerHub.png";
+import Dobbert from "@/assets/images/Dobbert.png";
 import Placeholder4 from "@/assets/images/Placeholder4.png";
 import Polariod from "@/assets/images/Polariod.png";
 import PixelHeartInterest from "@/components/PixelHeartInterest.vue";
@@ -114,7 +114,7 @@ const items = ref([
     image: Placeholder1,
     title: "Team Manager App",
     description:
-      "This application is built with React on the frontend, using Express for the backend, and MongoDB for data storage. It enables users to manage teams, tournaments, and profiles with role-based access control.",
+      "A React and Express app with MongoDB for managing teams and tournaments. Users can log in via Discord OAuth, create teams, and join tournaments. Role-based access controls and limits are enforced, with all data stored efficiently in MongoDB",
     frontend:
       "- The app offers a dynamic, responsive interface, allowing users to register, log in via Discord OAuth, and manage teams and tournaments.",
     backend:
@@ -124,8 +124,10 @@ const items = ref([
   },
   {
     id: 2,
-    image: Placeholder2,
+    image: GamerHub,
     title: "GamerHub",
+    description:
+      "A Vue 3 and Laravel app with PostgreSQL for profiles, groups, events, and real-time chat. It features smooth navigation with Inertia.js, real-time search, and Steam integration. Laravel handles auth and logic, with PostgreSQL managing complex relational data.",
     frontend:
       "Vue 3 - Handles user actions like profile updates, group management, event creation, and real-time search. Uses Inertia.js for smooth, reload-free navigation between Vue and the backend.",
     backend:
@@ -135,8 +137,10 @@ const items = ref([
   },
   {
     id: 3,
-    image: Placeholder3,
+    image: Dobbert,
     title: "Invoice Automation Application",
+    description:
+      "A React and Django app with SQLite for parsing and managing invoices. It features secure login via Microsoft Entra ID, drag-and-drop PDF field selection, and custom parsing presets. Django handles email ingestion, PDF parsing, and CSV/report generation, with SQLite managing presets, results, and system state.",
     frontend:
       "React - Offers a secure, user-friendly interface for configuring invoice parsing, managing presets, and reviewing reports. It uses Microsoft Entra ID (Azure AD) for authentication and supports drag-and-drop PDF field selection.",
     backend:
@@ -488,7 +492,7 @@ const downloadResume = () => {
 
       <!-- Content Area -->
       <div
-        class="bg-[#E4F5F9] border-l-2 border-r-2 border-b-2 border-[#6b3fa3]"
+        class="bg-[#E4F5F9] border-l-2 border-r-2 border-b-2 border-[#6b3fa3] h-[45vh] flex items-center justify-center"
       >
         <div class="w-full">
           <!-- Main Carousel -->
@@ -500,71 +504,35 @@ const downloadResume = () => {
             :transition="500"
           >
             <Slide v-for="item in items" :key="item.id">
-              <div
-                class="relative h-[65vh] flex flex-row justify-center p-12 shadow-lg"
-              >
-                <!-- Text Content Section -->
-                <div class="w-full md:w-[65%] text-left pr-6 space-y-6">
-                  <h2
-                    class="text-2xl md:text-3xl font-bold text-[#6b3fa3] border-b-2"
-                  >
-                    {{ item.title }}
-                  </h2>
-                  <ul
-                    class="text-gray-700 text-base md:text-lg space-y-5 list-disc pl-7 pr-3"
-                  >
-                    <li>
-                      <span class="text-[#6b3fa3]">Frontend: </span>
-                      {{ item.frontend }}
-                    </li>
-                    <li>
-                      <span class="font-bold text-[#6b3fa3]">Backend: </span>
-                      {{ item.backend }}
-                    </li>
-                    <li>
-                      <span class="font-bold text-[#6b3fa3]">Database: </span>
-                      {{ item.database }}
-                    </li>
-                  </ul>
-                </div>
-
-                <!-- Image Section -->
-                <div class="w-[45%] flex justify-center items-center relative">
-                  <div
-                    class="absolute w-68 h-64 bg-white border-10 shadow-md"
-                    style="
-                      position: absolute !important;
-                      width: 272px;
-                      height: 256px;
-                      top: 50%;
-                      left: 50%;
-                      transform: translate(-50%, -50%);
-                    "
-                  >
-                    <img
-                      :src="item.image"
-                      alt="Project Image"
-                      class="w-full h-full object-cover"
-                      style="width: 272px; height: 256px"
-                    />
+              <div class="pl-13 pr-13">
+                <div
+                  class="shadow-lg grid gap-4 p-4 bg-[#bde6f0]"
+                  style="width: fit-content; height: fit-content"
+                >
+                  <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-[#6b3fa3]">
+                      {{ item.title }}
+                    </h2>
                   </div>
-                  <div
-                    class="absolute w-82 h-86"
-                    style="
-                      position: absolute !important;
-                      width: 328px;
-                      height: 344px;
-                      top: 50%;
-                      left: 50%;
-                      transform: translate(-50%, -50%);
-                    "
-                  >
-                    <img
-                      :src="Polariod"
-                      alt="Project Image"
-                      class="w-full h-full object-cover"
-                      style="width: 328px; height: 344px"
-                    />
+
+                  <!-- Content Section -->
+                  <div class="grid grid-cols-2">
+                    <!-- Image Section -->
+                    <div class="w-[400px]">
+                      <img
+                        :src="item.image"
+                        alt="Project Image"
+                        class="object-cover"
+                      />
+                    </div>
+
+                    <!-- Text Content Section -->
+                    <div class="flex items-center justify-end">
+                      <!-- Description Section -->
+                      <p class="text-gray-700 text-base md:text-md w-[210px]">
+                        {{ item.description }}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
