@@ -338,19 +338,19 @@ const downloadResume = () => {
             <!-- Three hearts with text -->
             <div class="flex justify-center space-x-4 text-center">
               <PixelHeartInterest
-                icon="/src/assets/images/Controller.png"
+                icon="@/assets/images/Controller.png"
                 label="Gaming"
                 :delay="700"
                 :isExpanded="isExpanded"
               />
               <PixelHeartInterest
-                icon="/src/assets/images/Music.png"
+                icon="@/assets/images/Music.png"
                 label="Music"
                 :delay="900"
                 :isExpanded="isExpanded"
               />
               <PixelHeartInterest
-                icon="/src/assets/images/Trees.png"
+                icon="@/assets/images/Trees.png"
                 label="Outgoing"
                 :delay="1200"
                 :isExpanded="isExpanded"
