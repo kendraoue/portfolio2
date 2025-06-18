@@ -341,19 +341,19 @@ const downloadResume = () => {
                 icon="/src/assets/images/Controller.png"
                 label="Gaming"
                 :delay="700"
-                :is-expanded="isExpanded"
+                :isExpanded="isExpanded"
               />
               <PixelHeartInterest
                 icon="/src/assets/images/Music.png"
                 label="Music"
                 :delay="900"
-                :is-expanded="isExpanded"
+                :isExpanded="isExpanded"
               />
               <PixelHeartInterest
                 icon="/src/assets/images/Trees.png"
                 label="Outgoing"
                 :delay="1200"
-                :is-expanded="isExpanded"
+                :isExpanded="isExpanded"
               />
             </div>
 

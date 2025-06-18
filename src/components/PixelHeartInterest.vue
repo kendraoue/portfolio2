@@ -2,10 +2,10 @@
 import pixelHeart from "@/assets/images/PixelHeart.png";
 
 defineProps<{
-  icon: string;
-  label: string;
-  delay: number;
-  isExpanded: boolean;
+  icon: string; // Index to select the correct icon
+  label: string; // Tooltip label
+  delay: number; // Retained for other purposes like animations
+  isExpanded: boolean; // Controls visibility
 }>();
 </script>
 
@@ -30,7 +30,7 @@ defineProps<{
   >
     <img :src="pixelHeart" class="w-50 h-30" alt="Heart outline" />
     <span class="absolute inset-0 flex items-center justify-center">
-      <img :src="icon" class="size-13" :alt="label" />
+      <img :src="icon" class="size-11" :alt="label" />
     </span>
     <span
       class="tooltip absolute pointer-events-none bg-[#9f76c9]/60 backdrop-blur-sm text-white px-3 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-sm -translate-y-8"
