@@ -1,0 +1,66 @@
+export const aboutSkillCategories = [
+  {
+    title: "Languages",
+    items: [
+      "C#",
+      "TypeScript",
+      "JavaScript",
+      "Python",
+      "SQL",
+      "JSON",
+      "HTML/CSS",
+    ],
+  },
+  {
+    title: "Frameworks",
+    items: [
+      ".NET 8/9",
+      "ASP.NET Core",
+      "Entity Framework Core",
+      "React 19",
+      "FastAPI",
+      "Azure Functions",
+    ],
+  },
+  {
+    title: "Developer Tools",
+    lineBreakBefore: "Microsoft Azure",
+    items: [
+      "Visual Studio",
+      "VS Code",
+      "Cursor",
+      "Git",
+      "GitHub",
+      "GitHub Actions",
+      "Azure DevOps",
+      "Microsoft Azure",
+      "Application Insights",
+      "Postman",
+      "TestComplete",
+    ],
+  },
+  {
+    title: "Databases & Integration",
+    items: [
+      "SQL Server",
+      "PostgreSQL",
+      "Cosmos DB",
+      "Azure Table Storage",
+      "REST APIs",
+      "JSON",
+      "WebSockets",
+      "Keycloak OIDC",
+    ],
+  },
+  {
+    title: "Testing",
+    items: [
+      "xUnit",
+      "Unit Testing",
+      "Integration Testing",
+      "API Testing",
+      "UI Automation",
+      "User Acceptance Testing",
+    ],
+  },
+];

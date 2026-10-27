@@ -1,0 +1,1281 @@
+/* ==========================================================================
+   01. GLOBAL DEFAULTS & RESETS
+   Base typography, sizing, and shared element behaviour.
+   ========================================================================== */
+
+/* -- Theme typography and inherited text colour --------------------------- */
+:root {
+  --font-body: Arial, Helvetica, sans-serif;
+  --font-heading: "Times New Roman", Times, serif;
+  font-family: var(--font-body);
+  color: #6b3fa3;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+}
+.window-bar,
+.projects-title,
+.projects-notepad__header,
+.projects-accordion__title,
+.about-panel__top {
+  font-family: var(--font-heading);
+}
+/* -- Predictable element sizing ----------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+/* Make the app root fill the available browser viewport. */
+html,
+body,
+#root {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+/* -- Shared interactive elements ----------------------------------------- */
+button,
+a {
+  cursor: pointer;
+}
+button {
+  font: inherit;
+}
+a {
+  color: inherit;
+}
+/* Remove the default top spacing from main headings. */
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+/* ==========================================================================
+   02. DESKTOP LAYOUT
+   Full-screen wallpaper and the desktop shortcut area.
+   ========================================================================== */
+
+/* -- Desktop surface ------------------------------------------------------ */
+.desktop {
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("images/desktop-background.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+}
+/* -- Desktop shortcuts --------------------------------------------------- */
+.desktop-icons {
+  position: fixed;
+  left: 12px;
+  top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 1;
+}
+/* Present shortcut buttons and links as vertically stacked icons. */
+.desktop-icons button,
+.desktop-icons a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  width: 110px;
+  height: 96px;
+  text-decoration: none;
+  color: #6b3fa3;
+  font-weight: 700;
+}
+/* Size the glyph used for each shortcut icon. */
+.desktop-icons span {
+  font-size: 55px;
+}
+/* ==========================================================================
+   03. DESKTOP WINDOWS
+   Shared floating window shell, title bar, content, and close control.
+   ========================================================================== */
+
+/* -- Window shell -------------------------------------------------------- */
+.desktop-window {
+  position: fixed;
+  border: 2px solid rgba(228, 245, 249, 0.5);
+
+  /* Allow the wallpaper to show through */
+  background: transparent;
+
+  box-shadow: 5px 6px 0 #3b434640;
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 330px;
+  max-width: calc(100vw - 30px);
+}
+
+/* -- Draggable title bar ------------------------------------------------- */
+.window-bar {
+  touch-action: none;
+
+  /* Frosted glass */
+  background: rgba(228, 245, 249, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 9px;
+  height: 40px;
+  cursor: move;
+  font-size: 18px;
+}
+
+/* -- Scrollable window content ------------------------------------------- */
+.window-body {
+  /* Keep the actual window content opaque */
+  background: #e4f5f9;
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+}
+/* -- Close button and icon ----------------------------------------------- */
+.close-window {
+  width: 60px;
+  height: 90px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+}
+/* Preserve the image proportions and animate hover/press feedback. */
+.close-icon {
+  display: block;
+  width: 70px;
+  height: 90px;
+  object-fit: contain;
+
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Slightly enlarge and brighten the close icon on hover. */
+.close-window:hover .close-icon {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Compress the close icon while the mouse button is held down. */
+.close-window:active .close-icon {
+  transform: scale(0.9);
+}
+/* Repeated content sizing rule from the original stylesheet (kept as-is). */
+.window-body {
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+}
+/* -- Content-specific window widths --------------------------------------
+   :has() sizes the outer window according to the view rendered inside it.
+   ------------------------------------------------------------------------- */
+.desktop-window:has(.about-content) {
+  width: 805px;
+}
+.desktop-window:has(.projects) {
+  width: 680px;
+}
+.desktop-window:has(.resume) {
+  width: 680px;
+}
+.desktop-window:has(.github-popup),
+.desktop-window:has(.linkedin-popup) {
+  animation: pop 0.3s ease;
+  transform-origin: center center;
+}
+.desktop-window:has(.github-popup) {
+  width: min(1200px, calc(100vw - 30px));
+}
+.window-body:has(.github-popup) {
+  padding: 0;
+  background: #0d1117;
+  line-height: 0;
+}
+.github-popup {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+}
+.github-popup__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+.github-popup:hover .github-popup__image {
+  filter: brightness(1.03);
+}
+.github-popup:focus-visible {
+  outline: 2px solid #9f76c9;
+  outline-offset: -2px;
+}
+.desktop-window:has(.linkedin-popup) {
+  width: min(1200px, calc(100vw - 30px));
+}
+.window-body:has(.linkedin-popup) {
+  padding: 0;
+  background: #f3f2ef;
+  line-height: 0;
+}
+.linkedin-popup {
+  display: block;
+  cursor: pointer;
+  text-decoration: none;
+}
+.linkedin-popup__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  vertical-align: top;
+}
+.linkedin-popup:hover .linkedin-popup__image {
+  filter: brightness(1.02);
+}
+.linkedin-popup:focus-visible {
+  outline: 2px solid #9f76c9;
+  outline-offset: -2px;
+}
+/* ==========================================================================
+   04. ABOUT WINDOW
+   Layout uses Bootstrap utilities in about-content.jsx
+   (flex, position, type scale). Custom rules below cover backgrounds,
+   portrait size, and spacing Bootstrap has no equivalent for.
+   ========================================================================== */
+
+/* -- Stacked profile halves ----------------------------------------------
+   Height is custom: Bootstrap has no 30vh utility. Right padding clears
+   the 220px portrait / skills grid on the right (24px inset + gap).
+   ------------------------------------------------------------------------- */
+.about-content {
+  height: 30vh;
+  min-height: 300px;
+}
+.about-top,
+.about-bottom {
+  padding: 24px 260px 24px 24px;
+}
+/* Layered wallpaper + wash. Multiple background-image layers are not
+   available as Bootstrap utilities. */
+.about-top {
+  background-image: radial-gradient(
+      circle at center,
+      #6bdbc1 0%,
+      transparent 70%
+    ),
+    url("images/line.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.about-bottom {
+  background: radial-gradient(ellipse at top, #97bf04, transparent 70%);
+}
+.info-text {
+  color: #78a633;
+}
+/* Categorized skill copy under the Skills slide heading. */
+.about-top--skills {
+  justify-content: flex-start;
+  overflow: auto;
+  padding-top: 12px;
+}
+.about-skills-categories {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+.about-skills-category {
+  margin: 0 0 6px;
+}
+.about-skills-category strong {
+  font-weight: 700;
+}
+/* -- Portrait overlay ----------------------------------------------------
+   Horizontal inset and stacking order only. Vertical centering uses
+   Bootstrap top-50 translate-middle-y.
+   ------------------------------------------------------------------------- */
+.about-portrait {
+  right: 24px;
+  z-index: 2;
+}
+.portrait {
+  display: block;
+  box-sizing: border-box;
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 18%;
+}
+/* -- About carousel: slide fade on change -------------------------------- */
+@keyframes about-slide-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.about-slide-fade {
+  animation: about-slide-fade-in 0.4s ease forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-slide-fade {
+    animation: none;
+  }
+}
+/* -- About carousel: nav in bottom-right, portrait-area variants ---------- */
+.about-carousel-controls {
+  position: absolute;
+  right: 24px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+}
+/* Polygon arrow controls (clip-path), not circular buttons. */
+.about-carousel-btn {
+  width: 32px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: #55bf0a;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+.about-carousel-btn:hover:not(:disabled) {
+  background: #55bf0aab;
+}
+.about-carousel-btn--prev {
+  clip-path: polygon(80% 20%, 80% 80%, 20% 50%);
+}
+.about-carousel-btn--next {
+  clip-path: polygon(20% 20%, 20% 80%, 80% 50%);
+}
+.about-carousel-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+/* Square slide indicators between prev / next. */
+.about-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.about-carousel-square {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 2px solid #55bf0a;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.about-carousel-square.active {
+  background: #55bf0a;
+}
+.about-carousel-square:hover {
+  background: #55bf0aab;
+}
+.about-carousel-square.active:hover {
+  background: #55bf0a;
+}
+/* 4×4 skill icons where the portrait sits on slide 2 (no outer border). */
+.about-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 6px;
+  width: 220px;
+  height: 220px;
+  padding: 4px;
+  background: transparent;
+  border-radius: 4px;
+}
+.about-icon-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  background: transparent;
+}
+.about-icon-cell img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  flex-shrink: 0;
+}
+/* Hobbies slide: short about-bottom strip; about-top grows for the grid. */
+.about-content--hobbies .about-top {
+  flex: 1 1 0;
+  padding-right: 24px;
+  min-height: 0;
+}
+.about-content--hobbies .about-bottom {
+  flex: 0 0 44px;
+  padding: 2px 24px 4px;
+  min-height: 0;
+}
+.about-top--hobbies {
+  justify-content: flex-start;
+  padding-top: 8px;
+  gap: 4px;
+  overflow: hidden;
+}
+.about-top--hobbies h1 {
+  font-size: 1.65rem;
+  line-height: 1.1;
+}
+.about-bottom--hobbies .about-carousel-controls {
+  position: absolute;
+  right: 24px;
+  bottom: 8px;
+}
+.about-hobbies-grid--full {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+.about-hobby-tile {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  min-height: 0;
+  min-width: 0;
+}
+.about-hobby-tile.is-muted .about-hobby-icon {
+  opacity: 0.32;
+}
+.about-hobby-tile.is-selected .about-hobby-icon {
+  opacity: 1;
+  border-color: #198754;
+}
+.about-hobby-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 4px 5px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #6bdbc1 0%, #97bf04 100%);
+  font-weight: 700;
+  font-size: clamp(0.52rem, 1.25vw, 0.68rem);
+  line-height: 1.12;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.2s ease;
+  word-break: break-word;
+}
+.about-hobby-check {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #55bf0a;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+/* -- Interest cards and layered pixel-heart artwork ---------------------- */
+.interest-list {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.interest {
+  text-align: center;
+  flex: 1;
+  min-width: 80px;
+}
+.interest-art {
+  height: 100px;
+  position: relative;
+}
+.pixel-heart {
+  width: 100%;
+  height: 95px;
+  object-fit: contain;
+}
+/* Position each interest icon over its heart. translateX(-50%) offsets
+   half the icon width so left: 50% centers it accurately. */
+.interest-icon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  top: 31px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.interest strong {
+  display: block;
+}
+/* ==========================================================================
+   05. PROJECTS WINDOW
+   Title, preview, description, highlight list, and footer carousel controls.
+   ========================================================================== */
+
+/* -- Projects content container ------------------------------------------ */
+.projects {
+  display: flex;
+  flex-direction: column;
+  background: #d4ecf4;
+  padding: 0;
+  max-height: 70vh;
+  overflow: auto;
+  min-height: 320px;
+}
+.projects-layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 280px;
+}
+.projects-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+.projects-row--top {
+  flex: 0 0 auto;
+  background: #e4f5f9;
+  padding: 16px 22px 68px;
+}
+.projects-row--bottom {
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: stretch;
+  background: #c5e3ee;
+  padding: 68px 22px 14px;
+}
+.projects-title {
+  margin: 0;
+  font-size: 1.35rem;
+  text-align: left;
+}
+.project-image-stage {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: calc(100% - 44px);
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+.project-image-stage .project-image-wrap {
+  pointer-events: auto;
+}
+.project-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.project-image {
+  display: block;
+  max-width: 100%;
+  max-height: 160px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.project-inline-marquee {
+  overflow: hidden;
+  width: min(100%, 320px);
+  margin: 8px auto 0;
+  line-height: 0;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+}
+.project-inline-marquee--hero {
+  width: min(100%, 380px);
+  margin: 0 auto;
+}
+.project-inline-marquee__track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  animation: project-inline-marquee-ltr 22s linear infinite;
+}
+.project-inline-marquee__img {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 36px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+}
+.project-inline-marquee--hero .project-inline-marquee__track {
+  gap: 20px;
+  animation-duration: 28s;
+}
+.project-inline-marquee--hero .project-inline-marquee__img {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  object-fit: contain;
+}
+@keyframes project-inline-marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-inline-marquee__track {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+    gap: 12px;
+  }
+  .project-inline-marquee__track .project-inline-marquee__img:nth-child(n + 6) {
+    display: none;
+  }
+}
+.project-description {
+  margin: 0 0 10px;
+  line-height: 1.45;
+}
+/* -- Project highlights list ---------------------------------------------- */
+.project-details {
+  margin: 0 0 8px;
+  padding: 0;
+}
+.project-highlights {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+.project-highlights li {
+  margin-bottom: 6px;
+  line-height: 1.35;
+  font-size: 0.85rem;
+}
+.project-highlights li:last-child {
+  margin-bottom: 0;
+}
+/* -- Carousel footer: prev, page count, next (bottom-right) ---------------- */
+.projects-row--bottom .projects-carousel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.projects-carousel-btn {
+  font-size: 16px;
+  background: #d9f2a2;
+  color: white;
+  border: 0;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+}
+.project-count {
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 3.5rem;
+  text-align: center;
+}
+/* ==========================================================================
+   06. RESUME WINDOW
+   Action links and embedded resume preview.
+   ========================================================================== */
+
+/* -- Resume container and toolbar ---------------------------------------- */
+.resume {
+  padding: 16px;
+  background: #e4f5f9;
+}
+.resume-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.resume h2 {
+  margin-right: auto;
+}
+/* -- Embedded document viewer -------------------------------------------- */
+.resume iframe {
+  width: 100%;
+  height: 55vh;
+  border: 2px solid #55bf0a;
+  background: white;
+}
+/* -- Shared action-link appearance --------------------------------------- */
+.action {
+  display: inline-block;
+  background: #9f76c9;
+  padding: 9px 12px;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+}
+.small-note {
+  font-size: 12px;
+}
+/* ==========================================================================
+   07. MOBILE HOME SCREEN
+   Mobile-specific wallpaper, widgets, profile, and bottom navigation.
+   ========================================================================== */
+
+/* -- Mobile page surface ------------------------------------------------- */
+.mobile {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-image: url("images/rain_bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-y: auto;
+  text-align: center;
+}
+/* -- Home-screen app icons (layout uses Bootstrap grid) -------------------- */
+.mobile-icon-grid__icon {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.mobile-icon-grid__icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 22%;
+  pointer-events: none;
+}
+/* -- Top navigation (full-width edge to edge) ----------------------------- */
+.top-nav {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 22px;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0;
+  background: rgba(233, 236, 239, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.top-nav .mobile-stickers {
+  padding: 0 16px 16px;
+}
+
+/* -- Decorative sticker images ------------------------------------------- */
+.mobile-stickers {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.mobile-stickers img {
+  height: 85px;
+  max-width: 140px;
+  object-fit: contain;
+}
+/* -- Mobile profile summary ---------------------------------------------- */
+.mobile-profile {
+  margin: 22px auto;
+  max-width: 380px;
+}
+.mobile-profile > img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  object-position: center 18%;
+}
+.mobile-profile h1 {
+  font-size: 32px;
+  text-shadow: 2px 2px white;
+}
+.mobile-profile p {
+  line-height: 1.6;
+}
+/* -- Fixed bottom navigation dock -----------------------------------------
+   A higher z-index keeps the dock above home-screen content; the modal
+   overlay below uses an even higher layer to cover it when opened.
+   ------------------------------------------------------------------------- */
+.mobile-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 8px;
+  background: rgba(233, 236, 239, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  z-index: 20;
+  box-shadow: 0 -3px 12px #772d7750;
+}
+.mobile-dock button,
+.mobile-dock a {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  max-width: 56px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+.mobile-dock img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 22%;
+  pointer-events: none;
+}
+/* ==========================================================================
+   08. MOBILE MODALS
+   Full-screen dimmer, popup window, and mobile-specific content overrides.
+   ========================================================================== */
+
+/* -- Modal overlay ------------------------------------------------------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: #0008;
+  z-index: 30;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding-top: 24px;
+}
+/* -- Modal dialog -------------------------------------------------------- */
+.mobile-modal {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-height: 100dvh;
+  overflow: auto;
+  padding: 28px 16px 18px;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: left;
+  animation: pop 0.3s ease;
+  background: #C5E3F0;
+}
+
+/* -- Modal dismissal button ---------------------------------------------- */
+.modal-close {
+  position: fixed;
+  top: 27px;
+  right: 12px;
+  z-index: 45;
+  font-size: 28px;
+  line-height: 1;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+/* -- Stack interest cards within the narrower modal ---------------------- */
+.mobile-modal .interest-list {
+  display: block;
+}
+.mobile-modal .interest {
+  padding: 10px;
+  border: 2px solid #9f76c9;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+.mobile-modal .interest-art {
+  height: 70px;
+}
+.mobile-modal .pixel-heart {
+  height: 70px;
+}
+.mobile-modal .interest-icon {
+  top: 17px;
+}
+/* -- Reuse desktop project/resume components with modal-friendly sizing -- */
+.mobile-modal .projects,
+.mobile-modal .resume {
+  background: transparent;
+  padding: 0;
+  max-height: none;
+}
+.mobile-modal .resume iframe {
+  height: 50vh;
+}
+.mobile-modal .resume-actions {
+  display: flex;
+}
+.mobile-modal .resume-actions h2 {
+  width: 100%;
+}
+.mobile-modal:has(.about-panel),
+.mobile-modal:has(.projects-notepad),
+.mobile-modal:has(.contact-card) {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+}
+/* -- iOS-style contact card (mobile Phone app) --------------------------- */
+.contact-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 8px 16px 28px;
+  background: #f2f2f7;
+}
+.contact-card__hero {
+  padding: 28px 12px 24px;
+  text-align: center;
+}
+.contact-card__avatar {
+  width: 118px;
+  height: 118px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 18%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+.contact-card__name {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #1c1c1e;
+}
+.contact-card__group {
+  margin-bottom: 22px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+}
+.contact-card__row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  border-bottom: 0.5px solid rgba(60, 60, 67, 0.18);
+  text-decoration: none;
+  color: inherit;
+}
+.contact-card__row:last-child {
+  border-bottom: 0;
+}
+.contact-card__label {
+  font-size: 0.72rem;
+  text-transform: capitalize;
+  color: #8e8e93;
+}
+.contact-card__value {
+  font-size: 1.05rem;
+  color: #007aff;
+}
+.contact-card__value--plain {
+  color: #1c1c1e;
+}
+/* -- Mobile projects notepad accordion ----------------------------------- */
+.projects-notepad {
+  flex: 1 1 auto;
+  min-height: 0;
+  background-color: #fffef2;
+}
+.projects-notepad__header {
+  flex: 0 0 auto;
+  padding: 10px 16px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+  background: linear-gradient(180deg, #7a5c47 0%, #4a3428 85%);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+.projects-notepad__scroll {
+  min-height: 0;
+  padding: 10px 10px 20px 0;
+  background-color: #fffef2;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 27px,
+    rgba(120, 180, 220, 0.45) 27px,
+    rgba(120, 180, 220, 0.45) 28px
+  );
+}
+.projects-accordion {
+  margin-left: 14px;
+  padding-left: 12px;
+  border-left: 2px solid #e25353;
+}
+.projects-accordion__item {
+  border-bottom: 1px solid rgba(122, 92, 71, 0.25);
+}
+.projects-accordion__item.is-open {
+  background: rgba(255, 255, 255, 0.55);
+}
+.projects-accordion__trigger {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 8px 12px 4px;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+.projects-accordion__title {
+  flex: 1 1 auto;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #2c241c;
+  line-height: 1.25;
+}
+.projects-accordion__date {
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b5a48;
+  white-space: nowrap;
+}
+.projects-accordion__panel {
+  padding: 0 8px 14px 4px;
+}
+.projects-accordion__description {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #2c241c;
+}
+.projects-accordion__highlights {
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: 0.86rem;
+  line-height: 1.4;
+  color: #3a322a;
+}
+.projects-accordion__highlights li {
+  margin-bottom: 6px;
+}
+.about-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.about-panel__top {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #6cadc1 10%, #0789d7 90%);
+  height: 40px;
+}
+.about-panel__top .row {
+  margin-left: 0;
+  margin-right: 0;
+  min-height: 100%;
+}
+.about-panel__top [class*="col-"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+.about-panel__body {
+  --about-bubble-canvas: #c5e3f0;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: var(--about-bubble-canvas);
+  padding: 12px 14px 16px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.about-panel__bottom {
+  background: #6cadc1;
+  padding: 10px 12px 14px;
+}
+.about-panel__input {
+  border: 0;
+  border-radius: 1.25rem;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.about-panel__input:focus {
+  outline: none;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.06),
+    0 0 0 2px rgba(7, 137, 215, 0.35);
+}
+.about-panel__send {
+  border: 0;
+  border-radius: 1.25rem;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(180deg, #00d0ea 0%, #0789d7 100%);
+  cursor: pointer;
+}
+.about-panel__send:hover {
+  filter: brightness(1.05);
+}
+.about-panel__send:active {
+  filter: brightness(0.95);
+}
+.about-bubble-thread {
+  max-width: 100%;
+}
+.about-bubble-thread .yours.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.about-bubble-thread .yours .message {
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin: 5px 25% 5px 0;
+  display: inline-block;
+  background-color: #eee;
+  position: relative;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: left;
+  color: #111;
+}
+.about-bubble-thread .yours .message.about-bubble-enter {
+  opacity: 0;
+  animation: about-bubble-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.about-bubble-thread .yours .message.last::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: -7px;
+  height: 20px;
+  width: 20px;
+  background: #eee;
+  border-bottom-right-radius: 15px;
+}
+.about-bubble-thread .yours .message.last::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: -10px;
+  width: 10px;
+  height: 20px;
+  background: var(--about-bubble-canvas);
+  border-bottom-right-radius: 10px;
+}
+/* ==========================================================================
+   09. ANIMATIONS
+   Scale-and-fade entrance (mobile modal, social desktop windows).
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .desktop-window:has(.github-popup),
+  .desktop-window:has(.linkedin-popup) {
+    animation: none;
+  }
+  .about-bubble-thread .yours .message.about-bubble-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes about-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
