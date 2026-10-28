@@ -1198,19 +1198,32 @@ h3 {
 .about-panel__send:active {
   filter: brightness(0.95);
 }
+.about-panel__send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: none;
+}
 .about-bubble-thread {
   max-width: 100%;
+  min-width: 0;
 }
 .about-bubble-thread .yours.messages {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
+  min-width: 0;
 }
 .about-bubble-thread .yours .message {
   border-radius: 20px;
   padding: 8px 15px;
   margin: 5px 25% 5px 0;
   display: inline-block;
+  max-width: 75%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
   background-color: #eee;
   position: relative;
   font-size: 0.95rem;
@@ -1222,27 +1235,34 @@ h3 {
   opacity: 0;
   animation: about-bubble-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
-.about-bubble-thread .yours .message.last::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  bottom: 0;
-  left: -7px;
-  height: 20px;
-  width: 20px;
-  background: #eee;
-  border-bottom-right-radius: 15px;
+.about-bubble-thread .mine.messages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 8px;
+  width: 100%;
+  min-width: 0;
 }
-.about-bubble-thread .yours .message.last::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  bottom: 0;
-  left: -10px;
-  width: 10px;
-  height: 20px;
-  background: var(--about-bubble-canvas);
-  border-bottom-right-radius: 10px;
+.about-bubble-thread .mine .message {
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin: 5px 0 5px 25%;
+  display: inline-block;
+  max-width: 75%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  position: relative;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  text-align: left;
+  background: linear-gradient(to bottom, #00b3ea 0%, #0085d1 100%);
+}
+.about-bubble-thread .mine .message.about-bubble-enter--sent {
+  opacity: 0;
+  animation: about-bubble-in 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 /* ==========================================================================
    09. ANIMATIONS
@@ -1254,6 +1274,11 @@ h3 {
     animation: none;
   }
   .about-bubble-thread .yours .message.about-bubble-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .about-bubble-thread .mine .message.about-bubble-enter--sent {
     animation: none;
     opacity: 1;
     transform: none;

@@ -32,7 +32,7 @@ function ContactRow({ href, label, value, external, download }) {
 }
 
 export function ContactCard() {
-  const { name, phone, phoneDisplay, location } = site.contact;
+  const { name, email, location } = site.contact;
 
   return (
     <div className="contact-card h-100 overflow-y-auto">
@@ -48,9 +48,9 @@ export function ContactCard() {
 
       <div className="contact-card__group">
         <ContactRow
-          href={`tel:+1${phone}`}
-          label="mobile"
-          value={phoneDisplay}
+          href={`mailto:${email}`}
+          label="email"
+          value={email}
         />
       </div>
 

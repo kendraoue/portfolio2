@@ -2,8 +2,7 @@ export const site = {
   mobileBreakpoint: 768,
   contact: {
     name: "Kendra Ouellet",
-    phone: "2894426550",
-    phoneDisplay: "(289) 442-6550",
+    email: "kendraoue@gmail.com",
     location: "Hamilton, Ontario",
   },
   links: {
