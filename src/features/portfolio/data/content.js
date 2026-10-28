@@ -10,7 +10,7 @@ export const projects = [
   {
     id: 1,
     title: "PulseCareLink",
-    date: "2023 – Present",
+    date: "2025 – Present",
     image: pulseCareLinkDashboard,
     icon: asset("material-symbols--event.png"),
     technologies: technologyIcons(
@@ -36,7 +36,7 @@ export const projects = [
   {
     id: 2,
     title: "ResQHubAI",
-    date: "2022 – 2024",
+    date: "2025 – Present",
     image: asset("GamerHub.png"),
     icon: asset("cil--chat-bubble.png"),
     technologies: technologyIcons(
@@ -61,7 +61,7 @@ export const projects = [
   {
     id: 3,
     title: "Automated Call & Reminder Platform",
-    date: "2021 – 2023",
+    date: "2025 – 2026",
     image: manageUserDashboardImage,
     icon: asset("spreadsheet.png"),
     technologies: technologyIcons(
